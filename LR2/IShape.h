@@ -17,30 +17,42 @@ public:
 class Circle : public IShape {
 public:
 	double radius;
+	std::string name = "Circle";
 
 	Circle(double radius) {
 		this->radius = radius;
 	}
 
-	virtual double getP() {
+	Circle(double radius, std::string name) {
+		this->radius = radius;
+		this->name = name;
+	}
+
+	virtual double getP() override {
 		return 2 * radius * M_PI;
 	}
 
-	virtual double getS() {
+	virtual double getS() override {
 		return M_PI * radius * radius;
 	}
 
 	virtual std::string getName() {
-		return "Circle";
+		return name;
 	}
 };
 
 class Square : public IShape {
 public:
 	double side;
+	std::string name = "Square";
 
 	Square(double side) {
 		this->side = side;
+	}
+
+	Square(double radius, std::string name) {
+		this->side = radius;
+		this->name = name;
 	}
 
 	virtual double getP() override {
@@ -51,8 +63,8 @@ public:
 		return side * side;
 	}
 
-	virtual std::string getName() {
-		return "Square";
+	virtual std::string getName() override {
+		return name;
 	}
 };
 
@@ -60,10 +72,17 @@ class Rectangle : public IShape {
 public:
 	double width;
 	double height;
+	std::string name = "Rectangle";
 
 	Rectangle(double w, double h) {
 		this->width = w;
 		this->height = h;
+	}
+
+	Rectangle(double w, double h, std::string name) {
+		this->width = w;
+		this->height = h;
+		this->name = name;
 	}
 
 	virtual double getP() override {
@@ -74,8 +93,8 @@ public:
 		return width * height;
 	}
 
-	virtual std::string getName() {
-		return "Rectangle";
+	virtual std::string getName() override {
+		return name;
 	}
 };
 
@@ -86,6 +105,8 @@ public:
 		x2, y2,
 		x3, y3,
 		side1, side2, side3;
+
+	std::string name = "Triangle";
 
 	Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
 		this->x1 = x1;
@@ -108,6 +129,12 @@ public:
 		side3 = sqrt((x3 - x1) * (x3 - x1) + (y3 - y1) * (y3 - y1));
 	}
 
+	Triangle(double x1, double y1, double x2, double y2, double x3, double y3, std::string name) :
+		Triangle(x1, y1, x2, y2, x3, y3)
+	{
+		this->name = name;
+	}
+
 	virtual double getP() override {
 		return side1 + side2 + side3;
 	}
@@ -117,8 +144,8 @@ public:
 		return sqrt(p * (p - side1) * (p - side2) * (p - side3));
 	}
 
-	virtual std::string getName() {
-		return "Triangle";
+	virtual std::string getName() override {
+		return name;
 	}
 };
 

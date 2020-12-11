@@ -61,7 +61,7 @@ int main() {
 
 	std::cout << "Sum sq. of shapes: " << sumS << std::endl <<
 
-		"The highest perimeter is " << maxP << ", figure is " << 
+		"The highest perimeter is " << maxP << ", figure is " <<
 		getShapeByInd(shapeList, maxPInd)->getName() << std::endl <<
 
 		"The highest square is " << maxS << ", figure is " <<
@@ -71,7 +71,13 @@ int main() {
 		getShapeByInd(shapeList, minPInd)->getName() << std::endl <<
 
 		"The least square is " << minS << ", figure is " <<
-		getShapeByInd(shapeList, minSInd)->getName() << std::endl;
+		getShapeByInd(shapeList, minSInd)->getName() << std::endl <<
+
+		"And now some testing for constructors with names (used in Lab 6):"
+		<< std::endl << Square(5, "Cube").getName()
+		<< std::endl << Rectangle(5, 10, "Brick").getName()
+		<< std::endl << Circle(5, "Plate").getName()
+		<< std::endl << Triangle(0, 0, 5, 5, 10, 0, "Triangled figure").getName() << std::endl;
 
 
 	return 0;

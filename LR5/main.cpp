@@ -4,10 +4,10 @@ int main() {
 	try {
 		std::list<IShape*> list;
 
-		Circle circle(15);
-		Square square(20);
-		Rectangle rectangle(10, 30);
-		Triangle triangle(1, 2, 3, 4, 10, 5);
+		Circle circle("Kolobok", "15");
+		Square square("Dice", "20");
+		Rectangle rectangle("Brick", "10 20");
+		Triangle triangle("Pyramid", "0 0 10 0 0 5");
 
 		Serializator ser;
 

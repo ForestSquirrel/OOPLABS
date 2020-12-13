@@ -42,33 +42,35 @@ public:
 			nlohmann::json j;
 
 			i >> j;
-			for (auto outerIt = j.begin(); outerIt != j.end(); outerIt = std::next(outerIt)) {
-				auto it = outerIt->begin();
-				std::string currName = *it;
-				//std::cout << currName << " and " << *(std::next(it)) << std::endl;
+			for (auto it = j.begin(); it != j.end(); it = std::next(it)) {
+				std::string currType = (*it)["type"];
+				std::string currName = (*it)["name"];
+				//std::cout << currType << " and " << *(std::next(it)) << std::endl;
 				
-				if (currName == "circle") {
-					list.push_back(new Circle(*std::next(it)));
+				if (currType == "circle") {
+					list.push_back(new Circle((double)((*it)["radius"]), (*it)["name"]));
 				}
-				else if (currName == "square") {
-					list.push_back(new Square(*std::next(it)));
+				else if (currType == "square") {
+					list.push_back(new Square((double)((*it)["side"]), currName));
 				}
-				else if (currName == "rectangle") {
-					list.push_back(new Rectangle(*std::next(it), *std::next(it, 2)));
+				else if (currType == "rectangle") {
+					list.push_back(new Rectangle(
+						(double)((*it)["side1"]),
+						(double)((*it)["side2"]),
+						currName));
 				}
-				else if (currName == "triangle") {
-					//json stores it as x1 x2 x3 y1 y2 y3
-					//constructor is x1 y1 x2 y2 x3 y3
+				else if (currType == "triangle") {
 					list.push_back(new Triangle(
-						*std::next(it),
-						*std::next(it, 4),
-						*std::next(it, 2),
-						*std::next(it, 5),
-						*std::next(it, 3),
-						*std::next(it, 6)));
+						(double)((*it)["x1"]),
+						(double)((*it)["y1"]),
+						(double)((*it)["x2"]),
+						(double)((*it)["y2"]),
+						(double)((*it)["x3"]),
+						(double)((*it)["y3"]),
+						currName));
 				}
 				else {
-					throw(std::invalid_argument("File wasn't opened"));
+					throw(std::invalid_argument("Error parsing " + currType + " with name " + currName));
 				}
 			}
 		}

@@ -79,6 +79,10 @@ int main() {
 		<< std::endl << Circle(5, "Plate").getName()
 		<< std::endl << Triangle(0, 0, 5, 5, 10, 0, "Triangled figure").getName() << std::endl;
 
+	Circle newCircle("New circle", "50");
+	Square newSquare("New square", "80");
+	Rectangle newRectangle("New rect", "10 20");
+	Triangle newTriangle("New triangle", "0 0 10 0 0 5");
 
 	return 0;
 }

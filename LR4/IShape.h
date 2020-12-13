@@ -6,6 +6,9 @@
 #include <iostream>
 #include <stdexcept>
 #include <list>
+#include <string>
+#include <sstream>
+#include <stdexcept>
 
 class IShape {
 public:
@@ -26,6 +29,18 @@ public:
 	Circle(double radius, std::string name) {
 		this->radius = radius;
 		this->name = name;
+	}
+
+	//used in lab6
+	Circle(std::string name, std::string params) {
+		this->name = name;
+		try {
+			radius = std::stod(params);
+		}
+		catch (std::invalid_argument &e) {
+			std::cout << "Error creating circle with " << params << " parameter"
+				<< std::endl << e.what();
+		}
 	}
 
 	virtual double getP() override {
@@ -53,6 +68,18 @@ public:
 	Square(double radius, std::string name) {
 		this->side = radius;
 		this->name = name;
+	}
+
+	//used in lab6
+	Square(std::string name, std::string params) {
+		this->name = name;
+		try {
+			side = std::stod(params);
+		}
+		catch (std::invalid_argument & e) {
+			std::cout << "Error creating square with " << params << " parameter"
+				<< std::endl << e.what();
+		}
 	}
 
 	virtual double getP() override {
@@ -83,6 +110,19 @@ public:
 		this->width = w;
 		this->height = h;
 		this->name = name;
+	}
+
+	//used in lab6
+	Rectangle (std::string name, std::string params) {
+		this->name = name;
+		try {
+			std::stringstream ss(params);
+			ss >> width >> height;
+		}
+		catch (std::invalid_argument & e) {
+			std::cout << "Error creating rect with " << params << " parameter"
+				<< std::endl << e.what();
+		}
 	}
 
 	virtual double getP() override {
@@ -133,6 +173,19 @@ public:
 		Triangle(x1, y1, x2, y2, x3, y3)
 	{
 		this->name = name;
+	}
+
+	//used in lab6
+	Triangle(std::string name, std::string params) {
+		this->name = name;
+		try {
+			std::stringstream ss(params);
+			ss >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+		}
+		catch (std::invalid_argument & e) {
+			std::cout << "Error creating triangle with " << params << " parameter"
+				<< std::endl << e.what();
+		}
 	}
 
 	virtual double getP() override {

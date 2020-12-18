@@ -238,7 +238,7 @@ void GameHandler::showGame(const Player& opponent, bool debug) {
 				std::cout << "\x1B[32mB\033[0m";
 				break;
 			case Title::HIT:
-				std::cout << "X";
+				std::cout << "\033[3;42;30mX\033[0m";
 				break;
 			}
 			std::cout << " ";
@@ -281,9 +281,52 @@ void GameHandler::handleGame() {
 	placeAllShips(Player::Human);
 	placeAllShips(Player::Opponent);
 
-	showGame(Player::Opponent, false);
-	std::cout << std::endl << std::endl;
+	auto blankField = getFieldByPlayer(Player::Blank);
+	auto enemyField = getFieldByPlayer(Player::Opponent);
+
 	showGame(Player::Blank, false);
+
+	std::cout << std::endl
+		<< "Welcome to Naval Battle! Please type row, then column to shoot!" << std::endl
+		<< "It's 1 to 10. Example: 2 3" << std::endl;
+
+	int x = 0,
+		y = 0,
+		points = 0;
+
+	while (points < 23) {
+		std::string line;
+		getline(std::cin, line);
+
+		try {
+			bool goodInput = false;
+			while (!goodInput) {
+				if (!line.empty()) {
+					std::stringstream ss(line);
+					ss >> y >> x;
+				}
+				if ((y <= 0 || y > 10) || (x <= 0 || x > 10)) {
+					std::cout << "Wrong numbers. It's 1 to 10. Try again." << std::endl;
+				}
+				else {
+					goodInput = true;
+				}
+			}
+		}
+		catch (std::exception & e) {
+			std::cout << e.what() << std::endl;
+			return;
+		}
+
+		if (enemyField[y][x] == Title::SHIP) {
+			enemyField[y][x] = Title::HIT;
+			blankField[y][x] = Title::HIT;
+		}
+		//clear screen
+		std::cout << "\x1B[2J\x1B[H";
+
+		showGame(Player::Blank, false);
+	}
 }
 
 

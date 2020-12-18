@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <random>
 #include <ctime>
+#include <string>
+#include <sstream>
 
 enum class Title {
 	EMPTY,
@@ -63,7 +65,6 @@ private:
 
 
 	//FUNCTIONS
-
 
 	Title(*getFieldByPlayer(const Player& player))[FIELD_SIZE];
 

@@ -246,6 +246,18 @@ public:
 	virtual std::string getName() override {
 		return name;
 	}
+	
+	Triangle(std::string name, std::string params) {
+		this->name = name;
+		try {
+			std::stringstream ss(params);
+			ss >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+		}
+		catch (std::invalid_argument & e) {
+			std::cout << "Error creating triangle with " << params << " parameter"
+				<< std::endl << e.what();
+		}
+	}
 };
 
 IShape* getShapeByInd(std::list<IShape*> list, int ind);

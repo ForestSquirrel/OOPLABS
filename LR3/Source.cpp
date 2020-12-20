@@ -10,7 +10,6 @@ void main() {
 	Book.add_contact("Bob", "Washington", make_pair("+79115687895", phoneTypes::WORK));
 	Book.add_number("Bob", "Washington", make_pair("888-36-54", phoneTypes::HOME));
 
-	Book.print_all();
 
 	Book.change_number("Bob", "Washington", make_pair("888-36-54", phoneTypes::HOME), make_pair("999-88-77", phoneTypes::HOME));
 
@@ -19,7 +18,6 @@ void main() {
 	Book.remove_contact("John", "Stasey");
 	Book.change_name("Bob", "Washington", "Dan");
 	Book.change_second_name("Dan", "Washington", "Straus");
-
-	Book.print_all();
+	
 	system("pause");
 }

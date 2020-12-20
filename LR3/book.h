@@ -6,34 +6,13 @@
 class phoneBook {
 private:
 	vector<contact> phone_book;
-
-	void print_out(int i) {
-		cout << "Name: " << this->phone_book.at(i).get_name() << endl;
-		cout << "Second name: " << this->phone_book.at(i).get_second_name() << endl;
-		cout << "Numbers:" << endl;
-		map<string, phoneTypes> temp = this->phone_book.at(i).get_phones();
-		for (auto iter = temp.begin(); iter != temp.end(); iter++) {
-			cout << iter->first << " Phone type: ";
-			switch (iter->second)
-			{
-			case phoneTypes::HOME: {
-				cout << "Home" << endl;
-				break;
-			}
-			case phoneTypes::MOBILE: {
-				cout << "Mobile" << endl;
-				break;
-			}
-			case phoneTypes::WORK: {
-				cout << "Work" << endl;
-				break;
-			}
-			}
-		}
-		cout << endl;
-	}
 public:
 	phoneBook() {}
+	//book getter to work with frameworks etc.
+	vector<contact> getBook() {
+		return this->phone_book;
+	}
+
 	void add_contact(string name, string second_name, pair<string, phoneTypes> number) {
 			this->phone_book.push_back(contact(name, second_name, number));
 	}
@@ -85,6 +64,7 @@ public:
 			}
 		}
 	}
+	//find() now returns std vector of contacts which can be passed anywhere
 	vector<contact> find(string str) {
 		vector<contact> temp;
 		for (auto i = 0; i < this->phone_book.size();i++) {
@@ -96,10 +76,5 @@ public:
 			}
 		}
 		return temp;
-	}
-	void print_all() {
-		for (int i = 0; i < this->phone_book.size(); i++) {
-			this->print_out(i);
-		}
 	}
 };

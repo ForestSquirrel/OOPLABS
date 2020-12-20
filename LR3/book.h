@@ -1,5 +1,6 @@
 #pragma once
 #include "contact.h"
+#include "phoneTypes.h"
 #include<vector>
 #include <iostream>
 class phoneBook {
@@ -84,21 +85,17 @@ public:
 			}
 		}
 	}
-	void find(string str) {
+	vector<contact> find(string str) {
+		vector<contact> temp;
 		for (auto i = 0; i < this->phone_book.size();i++) {
 			if (this->phone_book.at(i).get_name().find(str) != string::npos) {
-				this->print_out(i);
+				temp.push_back(this->phone_book.at(i));
 			}
 			if (this->phone_book.at(i).get_second_name().find(str) != string::npos) {
-				this->print_out(i);
-			}
-			map<string, phoneTypes> temp = this->phone_book.at(i).get_phones();
-			for (auto iter = temp.begin(); iter != temp.end(); ++iter) {
-				if (iter->first.find(str) != string::npos) {
-					this->print_out(i);
-				}
+				temp.push_back(this->phone_book.at(i));
 			}
 		}
+		return temp;
 	}
 	void print_all() {
 		for (int i = 0; i < this->phone_book.size(); i++) {

@@ -1,14 +1,9 @@
 #pragma once
 #include <string>
 #include <map>
+#include "phoneTypes.h"
 
 using namespace std;
-
-enum class phoneTypes {
-	MOBILE,
-	HOME,
-	WORK
-};
 
 class contact {
 private:

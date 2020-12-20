@@ -76,7 +76,7 @@ public:
 		else {
 			for (auto i = 0; i < this->row; i++)
 				for (auto j = 0; j < this->column; j++)
-					this->matrix[i][j] = elements[this->row*i + j];
+					this->matrix[i][j] = elements[this->get_row()*i + j];
 		}
 	}
 	Matrix operator* (const Matrix &matr) {
@@ -174,12 +174,12 @@ public:
 		else
 			throw (invalid_argument("Matrix isn't square"));
 	}
-	void printToConsole() {
-		for (int i = 0; i < this->get_row(); i++) {
-			for (int j = 0; j < this->get_column(); j++) {
-				cout << this->get_element(i, j) << " ";
+	friend ostream& operator << (ostream &outputStream, Matrix &matrix) {
+		for (int i = 0; i < matrix.get_row(); i++) {
+			for (int j = 0; j < matrix.get_column(); j++) {
+				outputStream << matrix.get_element(i, j) << " ";
 			}
-			cout << endl;
+			outputStream << endl;
 		}
 	}
 };

@@ -23,11 +23,21 @@ public:
 	std::string name = "Circle";
 
 	Circle(double radius) {
-		this->radius = radius;
+		if (radius > 0.0) {
+			this->radius = radius;
+		}
+		else {
+			throw std::invalid_argument("Negative argument in circle constructor.");
+		}
 	}
 
 	Circle(double radius, std::string name) {
-		this->radius = radius;
+		if (radius > 0.0) {
+			this->radius = radius;
+		}
+		else {
+			throw std::invalid_argument("Negative argument in circle constructor.");
+		}
 		this->name = name;
 	}
 
@@ -35,10 +45,16 @@ public:
 	Circle(std::string name, std::string params) {
 		this->name = name;
 		try {
-			radius = std::stod(params);
+			double parsedRadius = std::stod(params);
+			if (parsedRadius > 0.0) {
+				this->radius = parsedRadius;
+			}
+			else {
+				throw std::invalid_argument("Negative argument in circle constructor.");
+			}
 		}
-		catch (std::invalid_argument &e) {
-			std::cout << "Error creating circle with " << params << " parameter"
+		catch (std::invalid_argument & e) {
+			std::cout << "Error circle constructor with " << params << " parameter"
 				<< std::endl << e.what();
 		}
 	}
@@ -62,24 +78,41 @@ public:
 	std::string name = "Square";
 
 	Square(double side) {
-		this->side = side;
-	}
-
-	Square(double radius, std::string name) {
-		this->side = radius;
-		this->name = name;
+		if (side > 0.0) {
+			this->side = side;
+		}
+		else {
+			throw std::invalid_argument("Negative argument in square constructor.");
+		}
 	}
 
 	//used in lab6
 	Square(std::string name, std::string params) {
 		this->name = name;
 		try {
-			side = std::stod(params);
+			double parsedSide = std::stod(params);
+
+			if (parsedSide > 0.0) {
+				this->side = parsedSide;
+			}
+			else {
+				throw std::invalid_argument("Negative argument in square constructor.");
+			}
 		}
 		catch (std::invalid_argument & e) {
 			std::cout << "Error creating square with " << params << " parameter"
 				<< std::endl << e.what();
 		}
+	}
+
+	Square(double side, std::string name) {
+		if (side > 0.0) {
+			this->side = side;
+		}
+		else {
+			throw std::invalid_argument("Negative argument in square constructor.");
+		}
+		this->name = name;
 	}
 
 	virtual double getP() override {
@@ -102,22 +135,41 @@ public:
 	std::string name = "Rectangle";
 
 	Rectangle(double w, double h) {
-		this->width = w;
-		this->height = h;
+		if (w > 0.0 && h > 0) {
+			this->width = w;
+			this->height = h;
+		}
+		else {
+			throw std::invalid_argument("Negative argument(s) in rectangle constructor.");
+		}
 	}
 
 	Rectangle(double w, double h, std::string name) {
-		this->width = w;
-		this->height = h;
+		if (w > 0.0 && h > 0) {
+			this->width = w;
+			this->height = h;
+		}
+		else {
+			throw std::invalid_argument("Negative argument(s) in rectangle constructor.");
+		}
 		this->name = name;
 	}
 
 	//used in lab6
-	Rectangle (std::string name, std::string params) {
+	Rectangle(std::string name, std::string params) {
 		this->name = name;
 		try {
 			std::stringstream ss(params);
-			ss >> width >> height;
+			double parsedWidth, parsedHeight;
+			ss >> parsedWidth >> parsedHeight;
+
+			if (parsedWidth > 0.0 && parsedHeight > 0) {
+				this->width = parsedWidth;
+				this->height = parsedHeight;
+			}
+			else {
+				throw std::invalid_argument("Negative argument(s) in rectangle constructor.");
+			}
 		}
 		catch (std::invalid_argument & e) {
 			std::cout << "Error creating rect with " << params << " parameter"
@@ -175,17 +227,23 @@ public:
 		this->name = name;
 	}
 
-	//used in lab6
-	Triangle(std::string name, std::string params) {
-		this->name = name;
-		try {
-			std::stringstream ss(params);
-			ss >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+	//side only constructor
+	Triangle(double side1, double side2, double side3) {
+		if (side1 > 0.0 && side2 > 0 && side3 > 0.0) {
+			this->side1 = side1;
+			this->side2 = side2;
+			this->side3 = side3;
 		}
-		catch (std::invalid_argument & e) {
-			std::cout << "Error creating triangle with " << params << " parameter"
-				<< std::endl << e.what();
+		else {
+			throw std::invalid_argument("Negative argument(s) in triangle constructor.");
 		}
+
+		if (this->getS() == 0) {
+			throw std::invalid_argument("Wrong arguments in triangle constructor. Impossible sides.");
+		}
+
+		//since other methods only use sides, storing zeroes in coords would be okay
+		x1 = y1 = x2 = y2 = x3 = y3 = 0;
 	}
 
 	virtual double getP() override {

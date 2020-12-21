@@ -122,7 +122,38 @@ void FigureBook::submitFigure()
             tr("Its not a figure."));
         return;
     }
-
+    QRegExp CircleRe("\\d*\\.?\\d+");
+    QRegExp SquareRe("\\d*\\.?\\d+");
+    QRegExp RectangleRe("\\d*\\.?\\d+ \\d*\\.?\\d+");
+    QRegExp TriangleRe("\\d*\\.?\\d+ \\d*\\.?\\d+ \\d*\\.?\\d+");
+    if (name.contains("circle")) {
+        if (!CircleRe.exactMatch(spec)){
+            QMessageBox::information(this, tr("Wrong params"),
+                                    tr("Check parameter input"));
+            return;
+        }
+    }
+    if (name.contains("square")) {
+        if (!SquareRe.exactMatch(spec)){
+            QMessageBox::information(this, tr("Wrong params"),
+                                    tr("Check parameter input"));
+            return;
+        }
+    }
+    if (name.contains("rectangle")) {
+        if (!RectangleRe.exactMatch(spec)){
+            QMessageBox::information(this, tr("Wrong params"),
+                                    tr("Check parameter input"));
+            return;
+        }
+    }
+    if (name.contains("triangle")) {
+        if (!TriangleRe.exactMatch(spec)){
+            QMessageBox::information(this, tr("Wrong params"),
+                                    tr("Check parameter input"));
+            return;
+        }
+    }
     if (currentMode == AddingMode) {
 
         if (!Figures.contains(name)) {

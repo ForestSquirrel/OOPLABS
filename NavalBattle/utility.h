@@ -46,29 +46,29 @@ BORDER_OFFSET = 3;
 //there ASCII art comes in handy
 
 //ASCII art constants 
-const std::string line =	"+===+===+===+===+===+===+===+===+===+===+===+\n";
-const std::string letters = "|   | A | B | C | D | E | F | G | H | I | J |\n";
-const std::string A =		"| 1 |";
-const std::string B =		"| 2 |";
-const std::string C =		"| 3 |";
-const std::string D =		"| 4 |";
-const std::string E =		"| 5 |";
-const std::string F =		"| 6 |";
-const std::string G =		"| 7 |";
-const std::string H =		"| 8 |";
-const std::string I =		"| 9 |";
-const std::string J =		"| 10|";
-const std::string ship =	"###";
-const std::string water =	"~~~";
-const std::string miss =	"<o>";
-const std::string Dship =	">#<"; //destroyed ship or damaged ship
+const std::string line =	"+=====+=====+=====+=====+=====+=====+=====+=====+=====+=====+=====+\n";
+const std::string letters = "|     |  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |  I  |  J  |\n";
+const std::string A =		"|  1  |";
+const std::string B =		"|  2  |";
+const std::string C =		"|  3  |";
+const std::string D =		"|  4  |";
+const std::string E =		"|  5  |";
+const std::string F =		"|  6  |";
+const std::string G =		"|  7  |";
+const std::string H =		"|  8  |";
+const std::string I =		"|  9  |";
+const std::string J =		"|  10 |";
+const std::string ship =	" SSS "; //ship
+const std::string water =	"\"~~~\""; //water
+const std::string miss =	" <o> "; //miss
+const std::string Dship =	"\'DDD\'"; //destroyed ship or damaged ship
 const std::string SP =		"|"; //spacer
 
 std::string ASCIIartField(Title (*matrix)[FIELD_SIZE]) {
 	std::string art;
 	auto currField = matrix;
 	//header
-	art += "`";
+	art += "```ml\n";
 	art += line;
 	art += letters;
 	art += line;
@@ -136,7 +136,7 @@ std::string ASCIIartField(Title (*matrix)[FIELD_SIZE]) {
 		art += "\n";
 		art += line;
 	}
-	art += "`";
+	art += "\n```";
 	return art;
 }
 //input parsing

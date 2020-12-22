@@ -61,6 +61,8 @@ public:
 		return secondPlayerPoints;
 	}
 	void clear() {
+		firstPlayerName.clear();
+		secondPlayerName, clear();
 		for (int y = 0; y < FIELD_SIZE; ++y) {
 			for (int x = 0; x < FIELD_SIZE; ++x) {
 				FirstPlayerField[y][x] = Title::EMPTY;

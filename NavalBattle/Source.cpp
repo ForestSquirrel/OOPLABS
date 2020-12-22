@@ -188,6 +188,6 @@ public:
     }
 };
 int main() {
-    NavalBattleClient client("NzQzNDkyMTQ3ODg5ODMxOTg4.XzVdBQ.LlCuBhNmdB1YtwB0w-RmMP0HHHk", 2);
+    NavalBattleClient client("token str", 2);
     client.run();
 }
